@@ -11,6 +11,7 @@ room_names = ['Faner Hall', 'CS Main office', 'Linux Lab', 'Conference Room', 'S
 
 
 def gen_un(num=10):
+    #  return [{"id" : random.randint(10001, 99999) , "role":"student"} for i in range(num)]
     return [random.randint(10001, 99999) for i in range(num)]
 
 
