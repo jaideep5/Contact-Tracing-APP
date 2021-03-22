@@ -1,12 +1,17 @@
-import 'package:flutter/material.dart';
-import 'data.dart';
+import 'dart:math';
 
-/*import 'dart:convert';
-import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/material.dart';
+
+///import 'data.dart';
+
+import 'dart:convert';
+
+///import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
-import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';*/
+import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,146 +22,76 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      ///new code strt
-      debugShowCheckedModeBanner: false,
-      routes: <String, WidgetBuilder>{
-        '/data': (BuildContext context) => new DataPage()
-      },
-      home: new MyHomePage(),
-
-      ///new code end
-      /*title: 'Flutter Demo',
+      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: generateMaterialColor(Palette.primary),
         visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),*/
-      ///home: MyHomePage(title: 'Covid Contact Tracing'),
+      ),
+      home: MyHomePage(title: 'Covid Contact Tracing'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
+MaterialColor generateMaterialColor(Color color) {
+  return MaterialColor(color.value, {
+    50: tintColor(color, 0.9),
+    100: tintColor(color, 0.8),
+    200: tintColor(color, 0.6),
+    300: tintColor(color, 0.4),
+    400: tintColor(color, 0.2),
+    500: color,
+    600: shadeColor(color, 0.1),
+    700: shadeColor(color, 0.2),
+    800: shadeColor(color, 0.3),
+    900: shadeColor(color, 0.4),
+  });
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
+int tintValue(int value, double factor) =>
+    max(0, min((value + ((255 - value) * factor)).round(), 255));
 
-        ///resizeToAvoidBottomPadding: false,
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-          Container(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                  child: Text('Covid-Contact-Tracing',
-                      style: TextStyle(
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green)),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 20.0),
-            child: Column(
-              children: <Widget>[
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: 'User ID',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green))),
-                ),
-                SizedBox(height: 20.0),
-                TextField(
-                  decoration: InputDecoration(
-                      labelText: 'Role',
-                      labelStyle: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green))),
-                  obscureText: true,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 40.0),
-          Container(
-            height: 40.0,
-            child: Material(
-              borderRadius: BorderRadius.circular(20.0),
-              shadowColor: Colors.greenAccent,
-              color: Colors.green,
-              elevation: 7.0,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/data');
-                },
-                child: Center(
-                  child: Text(
-                    'LOGIN',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat'),
-                  ),
-                ),
-              ),
-            ),
-          )
+Color tintColor(Color color, double factor) => Color.fromRGBO(
+    tintValue(color.red, factor),
+    tintValue(color.green, factor),
+    tintValue(color.blue, factor),
+    1);
 
-          //SizedBox(height: 15.0),
-          /*Row(
-                ///child: Row(
-                ///mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    'New to Spotify ?',
-                    style: TextStyle(fontFamily: 'Montserrat'),
-                  ),
-                  SizedBox(width: 5.0),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/data');
-                    },
-                    child: Text(
-                      'Register',
-                      style: TextStyle(
-                          color: Colors.green,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline),
-                    ),
-                  )
-                ],
-              )*/
-        ]));
-  }
+int shadeValue(int value, double factor) =>
+    max(0, min(value - (value * factor).round(), 255));
 
-/*class MyHomePage extends StatefulWidget {
+Color shadeColor(Color color, double factor) => Color.fromRGBO(
+    shadeValue(color.red, factor),
+    shadeValue(color.green, factor),
+    shadeValue(color.blue, factor),
+    1);
+
+class Palette {
+  static const Color primary = Color(0xFF1A237E);
+}
+
+class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => new _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _result = "Text";
   NfcData _nfcData;
+  var _result = "Please Tap on the NFC Tag";
+
+  static final dateFormat = new DateFormat('MMM d, yyyy hh:mm aaa');
+  Map<String, dynamic> _response;
+  Map<String, dynamic> responseTitles = {
+    "name": "Room Name",
+    "current_strength": "Current Strength",
+    "max_capacity": "Max Capacity",
+    "last_sanitized_time": "Last Sanitized Time",
+  };
+
+  get green => null;
 
   Future<http.Response> _sendRequest() async {
     String room_id, status;
@@ -167,6 +102,9 @@ class _MyHomePageState extends State<MyHomePage> {
           room_id +
           " & " +
           status);
+    } else {
+      room_id = '';
+      status = 'denied';
     }
 
     http.Response response = await http.post(
@@ -175,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'user_id': '1234567',
+        'user_id': '123456',
         'room_id': room_id,
         'status': status,
         'timestamp': new DateTime.now().millisecondsSinceEpoch.toString()
@@ -183,23 +121,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     setState(() {
       _result = response.body;
-    });
-  }
-
-  Future _scanQR() async {
-    try {
-      var qrResult = await BarcodeScanner.scan();
-      setState(() {
-        _result = qrResult.rawContent;
-        _sendRequest();
-      });
-    } on PlatformException catch (e) {
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        setState(() {
-          _result = "Camera permission denied!";
-        });
+      print(_result);
+      _response = jsonDecode(utf8.decode(response.bodyBytes));
+      _response = jsonDecode(_result);
+      if (_response['last_sanitized_time'] != null) {
+        _response['last_sanitized_time'] =
+            dateFormat.format(DateTime.parse(_response['last_sanitized_time']));
       }
-    }
+    });
+    print("State updated!");
+    print(_response);
   }
 
   Future<void> startNFC() async {
@@ -240,12 +171,38 @@ class _MyHomePageState extends State<MyHomePage> {
         statusMapper: '',
       );
       response.status = NFCStatus.error;
-      ;
     }
 
     setState(() {
       _nfcData = response;
     });
+  }
+
+  Padding getTableElement(String value) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Text(
+        value,
+        style: TextStyle(color: Colors.indigo[900], fontSize: 20),
+        textAlign: TextAlign.left,
+      ),
+    );
+  }
+
+  List<Widget> populateCard() {
+    List<Widget> entryCard = new List<Widget>();
+    if (_response == null) {
+      entryCard.add(Image.network(
+        'https://images.unsplash.com/photo-1588771997195-ae313583be04?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&dl=united-nations-covid-19-response-1nhikKi0XNk-unsplash.jpg',
+        fit: BoxFit.fill,
+      ));
+    } else if (_response['code'] == 200) {
+      entryCard.add(getTableElement("Thank you for scanning!"));
+    } else {
+      responseTitles.forEach(
+          (k, v) => entryCard.add(getTableElement("$v : ${_response[k]}")));
+    }
+    return entryCard;
   }
 
   @override
@@ -260,20 +217,35 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Response Text',
+              'Please Tap on the NFC tag',
+              style: TextStyle(fontSize: 16, color: green),
             ),
-            Text(
-              '$_result',
-              style: Theme.of(context).textTheme.headline4,
+            Card(
+              elevation: 10,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: populateCard()),
             ),
+            SizedBox(height: 50),
+            RaisedButton.icon(
+                color: Colors.indigo[900],
+                textColor: Colors.white,
+                disabledColor: Colors.grey,
+                disabledTextColor: Colors.black,
+                padding: EdgeInsets.all(12.0),
+                splashColor: Colors.blueAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                onPressed: startNFC,
+                label: Text(
+                  "Scan",
+                  style: TextStyle(fontFamily: 'Times New Roman', fontSize: 23),
+                ),
+                icon: Icon(Icons.nfc_outlined))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-          icon: Icon(Icons.camera_alt),
-          label: Text("Scan"),
-          onPressed: startNFC),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
-  }*/
+  }
 }
