@@ -26,7 +26,7 @@ def gen_rid(num=10):
 
 
 def gen_datetime(base, max_hour_limit=10):
-    # generate a datetime in format yyyy-mm-dd hh:mm:ss.000000
+    #generate a datetime in format yyyy-mm-dd hh:mm:ss.000000
     base += timedelta(hours=random.randint(0, max_hour_limit),
                       minutes=random.randint(1, 30), seconds=random.randint(0, 10), microseconds=random.randint(0, 100000))
     return base

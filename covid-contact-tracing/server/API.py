@@ -19,7 +19,7 @@ def add_event():
     event = getEventObj(request.get_json())
     event.timestamp=datetime.datetime.now()
     print(event.status)
-    # return str(add_event_algo(event))
+    #return str(add_event_algo(event))
     return json.dumps(add_event_algo(event), default=json_serial)
 
 
