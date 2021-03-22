@@ -9,9 +9,9 @@ import 'dart:convert';
 ///import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 
 import 'package:flutter_nfc_reader/flutter_nfc_reader.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -197,7 +197,7 @@ class _MyHomePageState extends State<MyHomePage> {
         fit: BoxFit.fill,
       ));
     } else if (_response['code'] == 200) {
-      entryCard.add(getTableElement("Thank you for scanning!"));
+      entryCard.add(getTableElement("Thank you for scanning. Stay safe!!"));
     } else {
       responseTitles.forEach(
           (k, v) => entryCard.add(getTableElement("$v : ${_response[k]}")));
