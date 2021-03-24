@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:convert';
 
-///import 'package:barcode_scan/barcode_scan.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
@@ -133,6 +133,22 @@ class _MyHomePageState extends State<MyHomePage> {
     print(_response);
   }
 
+  Future _scanQR() async {
+    try {
+      var qrResult = await BarcodeScanner.scan();
+      setState(() {
+        _result = qrResult.rawContent;
+        _sendRequest();
+      });
+    } on PlatformException catch (e) {
+      if (e.code == BarcodeScanner.cameraAccessDenied) {
+        setState(() {
+          _result = "Camera permission denied!";
+        });
+      }
+    }
+  }
+
   Future<void> startNFC() async {
     NfcData response;
 
@@ -237,7 +253,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
                 ),
-                onPressed: startNFC,
+                onPressed: _scanQR,
                 label: Text(
                   "Scan",
                   style: TextStyle(fontFamily: 'Times New Roman', fontSize: 23),
