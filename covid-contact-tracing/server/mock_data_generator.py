@@ -1,7 +1,8 @@
 import random
 from datetime import datetime, timedelta
 from operator import attrgetter
-from contact_tracing import Event, SanitizedEvent, Room, SanitizedStatus
+from db_interface import add_room
+from entities import Event, SanitizedEvent, Room, SanitizedStatus
 import db_interface as db
 import algorithms as algo
 base = datetime(2020, 1, 22, 00, 00, 00)
@@ -11,22 +12,30 @@ room_names = ['Faner Hall', 'CS Main office', 'Linux Lab', 'Conference Room', 'S
 
 
 def gen_un(num=10):
-    #  return [{"id" : random.randint(10001, 99999) , "role":"student"} for i in range(num)]
-    return [random.randint(10001, 99999) for i in range(num)]
+    retVal = [70983, 67375, 38274, 15948, 39332, 46551, 89452, 65581, 91513, 56695, 93495, 14489, 33796, 22258, 35436, 28273, 15909, 49829, 91888, 41355, 12265, 25575, 13295, 94272, 75041, 79724, 94331, 49094, 97765, 76097, 27260, 79237, 56386, 41642, 76750, 19871, 80257, 18477, 84637, 46571, 44554, 84530, 48237, 71753, 77888, 33971, 60273, 54860, 29805, 20182, 50195, 69364, 69740, 66008, 36869, 90767, 76004, 17735, 70777, 92915, 87067, 63783, 49224, 86903, 81915, 56155, 35367, 50982, 90378, 96810, 49721, 29100, 34701, 53327, 35004, 51669, 85598, 38272, 80275, 59151, 50044, 27577, 69158, 33447, 63480, 44912, 57918, 46857, 77435, 76053, 15148, 16125, 54986, 31127, 38305, 65443, 29092, 75663, 98398, 48838]
+    #[random.randint(10001, 99999) for i in range(num)]
+    # print(retVal)
+    return retVal
 
 
 def gen_bmp_un(num=10):
-    return ["BMP" + str(random.randint(10001, 99999)) for i in range(num)]
+    retVal = ['BMP32369', 'BMP85052', 'BMP26184', 'BMP95577', 'BMP75406', 'BMP50291', 'BMP87861', 'BMP16918', 'BMP72539', 'BMP80786']
+    #["BMP" + str(random.randint(10001, 99999)) for i in range(num)]
+    # print(retVal)
+    return retVal
 
 
 def gen_rid(num=10):
-    return [chr(65 + random.randint(0, 25)) + str(random.randint(10001, 99999)) for i in range(num)]
+    retVal = ['J28929', 'P72143', 'S87978', 'L83225', 'B21970', 'S96687', 'L89485', 'D49972', 'G19247', 'S15838']
+    #[chr(65 + random.randint(0, 25)) + str(random.randint(10001, 99999)) for i in range(num)]
+    # print(retVal)
+    return retVal
 
 # or a function
 
 
 def gen_datetime(base, max_hour_limit=10):
-    #generate a datetime in format yyyy-mm-dd hh:mm:ss.000000
+    # generate a datetime in format yyyy-mm-dd hh:mm:ss.000000
     base += timedelta(hours=random.randint(0, max_hour_limit),
                       minutes=random.randint(1, 30), seconds=random.randint(0, 10), microseconds=random.randint(0, 100000))
     return base
@@ -35,7 +44,7 @@ def gen_datetime(base, max_hour_limit=10):
 def get_entry_exit_pairs(user_id, ridList, num=100):
     events = []
     start = base
-    for i in range(num):
+    for _ in range(num):
         room_id = ridList[random.randint(0, len(ridList)-1)]
         start = gen_datetime(start)
         if(start >= datetime.now()):
@@ -54,7 +63,7 @@ def get_sanitized_events_for_the_day(unList, roomList, date, frequency=1):
     minLength = min(len(unList), len(roomList))
     for user_id, room_id in zip(unList[:minLength], roomList[:minLength]):
         baseTime = date
-        for i in range(frequency):
+        for _ in range(frequency):
             start = gen_datetime(baseTime, max_hour_limit=10)
             end = gen_datetime(start, max_hour_limit=1)
             events.append(SanitizedEvent(user_id, room_id, 1, start))
@@ -106,11 +115,9 @@ def main():
             bmpUserList, ridList,  date, frequency=2)
 
     generate_room_entries(roomList)
-    #generate_mock_event_files(all_events, 'events')
-    #generate_mock_event_files(all_sanitized_events, 'sanitized-events')
+    generate_mock_event_files(all_events, 'events')
+    generate_mock_event_files(all_sanitized_events, 'sanitized-events')
 
-    #TODO: Add operations at 'one level up' -- handling things like, update_strength, update_last_sanitized_time, get_clean_window etc.
-    # The latter two are needed for us to see how the algo works
     for room in roomList:
         db.add_room(room.__dict__)
 

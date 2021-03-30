@@ -242,13 +242,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: populateCard()),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 2),
             RaisedButton.icon(
                 color: Colors.indigo[900],
                 textColor: Colors.white,
                 disabledColor: Colors.grey,
                 disabledTextColor: Colors.black,
-                padding: EdgeInsets.all(12.0),
+                padding:
+                    EdgeInsets.only(top: 12.0, left: 15, right: 15, bottom: 12),
                 splashColor: Colors.blueAccent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25.0),
@@ -256,12 +257,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: _scanQR,
                 label: Text(
                   "Scan",
-                  style: TextStyle(fontFamily: 'Times New Roman', fontSize: 23),
+                  style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
                 ),
                 icon: Icon(Icons.nfc_outlined))
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+          icon: Icon(Icons.camera_alt),
+          label: Text(
+            "Scan",
+            style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
+          ),
+          onPressed: startNFC),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
