@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-///import 'data.dart';
-
 import 'dart:convert';
 
 import 'package:barcode_scan/barcode_scan.dart';
@@ -278,54 +276,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             )
-            // RaisedButton.icon(
-            //   color: Colors.indigo[900],
-            //   textColor: Colors.white,
-            //   disabledColor: Colors.grey,
-            //   disabledTextColor: Colors.black,
-            //   padding:
-            //       EdgeInsets.only(top: 12.0, left: 15, right: 15, bottom: 12),
-            //   splashColor: Colors.blueAccent,
-            //   shape: RoundedRectangleBorder(
-            //     borderRadius: BorderRadius.circular(25.0),
-            //   ),
-            //   onPressed: _scanQR,
-            //   label: Text(
-            //     "Scan",
-            //     style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
-            //   ),
-            //   icon: Icon(Icons.nfc_outlined))
           ],
         ),
       ),
-
-      // floatingActionButton: FloatingActionButton.extended(
-      //     icon: Icon(Icons.camera_alt),
-      //     label: Text(
-      //       "Scan",
-      //       style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
-      //     ),
-      //     onPressed: startNFC),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton:
-      //     Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      //   FloatingActionButton(
-      //     child: new Text('Don\'t have an account?', style: new TextStyle(color: Color(0xFF2E3233))),
-      //     shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      //     onPressed: () {
-      //       //...
-      //     },
-      //   ),
-      //   SizedBox(
-      //     height: 10,
-      //   ),
-      //   FloatingActionButton(
-      //     child: Icon(Icons.star),
-      //     onPressed: () => startNFC(),
-      //     heroTag: null,
-      //   )
-      // ])
     );
   }
 }
