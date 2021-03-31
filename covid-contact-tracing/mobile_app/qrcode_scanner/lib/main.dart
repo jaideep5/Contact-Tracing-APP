@@ -224,53 +224,108 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     print(_result);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text(widget.title),
       ),
-      body: Center(
-        child: Column(
+      body: new Center(
+        child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            new Text(
               'Please Tap on the NFC tag',
               style: TextStyle(fontSize: 16, color: green),
             ),
-            Card(
+            new Card(
               elevation: 10,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: populateCard()),
             ),
-            SizedBox(height: 2),
-            RaisedButton.icon(
-                color: Colors.indigo[900],
-                textColor: Colors.white,
-                disabledColor: Colors.grey,
-                disabledTextColor: Colors.black,
-                padding:
-                    EdgeInsets.only(top: 12.0, left: 15, right: 15, bottom: 12),
-                splashColor: Colors.blueAccent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25.0),
+            SizedBox(height: 30),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new RaisedButton.icon(
+                  textColor: Colors.white,
+                  color: Colors.indigo[900],
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  splashColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  padding: const EdgeInsets.all(12.0),
+                  onPressed: startNFC,
+                  label: new Text("Scan_NFC"),
+                  icon: Icon(Icons.nfc_outlined),
                 ),
-                onPressed: _scanQR,
-                label: Text(
-                  "Scan",
-                  style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
+                new RaisedButton.icon(
+                  textColor: Colors.white,
+                  color: Colors.indigo[900],
+                  disabledColor: Colors.grey,
+                  disabledTextColor: Colors.black,
+                  splashColor: Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25.0),
+                  ),
+                  padding: const EdgeInsets.all(12.0),
+                  onPressed: _scanQR,
+                  label: new Text(
+                    "Scan_QR",
+                  ),
+                  icon: Icon(Icons.camera_alt),
                 ),
-                icon: Icon(Icons.nfc_outlined))
+              ],
+            )
+            // RaisedButton.icon(
+            //   color: Colors.indigo[900],
+            //   textColor: Colors.white,
+            //   disabledColor: Colors.grey,
+            //   disabledTextColor: Colors.black,
+            //   padding:
+            //       EdgeInsets.only(top: 12.0, left: 15, right: 15, bottom: 12),
+            //   splashColor: Colors.blueAccent,
+            //   shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(25.0),
+            //   ),
+            //   onPressed: _scanQR,
+            //   label: Text(
+            //     "Scan",
+            //     style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
+            //   ),
+            //   icon: Icon(Icons.nfc_outlined))
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-          icon: Icon(Icons.camera_alt),
-          label: Text(
-            "Scan",
-            style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
-          ),
-          onPressed: startNFC),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+      // floatingActionButton: FloatingActionButton.extended(
+      //     icon: Icon(Icons.camera_alt),
+      //     label: Text(
+      //       "Scan",
+      //       style: TextStyle(fontFamily: 'Times New Roman', fontSize: 18),
+      //     ),
+      //     onPressed: startNFC),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton:
+      //     Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      //   FloatingActionButton(
+      //     child: new Text('Don\'t have an account?', style: new TextStyle(color: Color(0xFF2E3233))),
+      //     shape: RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.all(Radius.circular(15.0))),
+      //     onPressed: () {
+      //       //...
+      //     },
+      //   ),
+      //   SizedBox(
+      //     height: 10,
+      //   ),
+      //   FloatingActionButton(
+      //     child: Icon(Icons.star),
+      //     onPressed: () => startNFC(),
+      //     heroTag: null,
+      //   )
+      // ])
     );
   }
 }

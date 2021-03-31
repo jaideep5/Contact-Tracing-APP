@@ -5,7 +5,7 @@ from db_interface import add_room
 from entities import Event, SanitizedEvent, Room, SanitizedStatus
 import db_interface as db
 import algorithms as algo
-base = datetime(2020, 1, 22, 00, 00, 00)
+base = datetime(2020, 1, 10, 00, 00, 00)
 
 room_names = ['Faner Hall', 'CS Main office', 'Linux Lab', 'Conference Room', 'Subway',
               'Grad School', 'Shryock Auditorium', 'REC center', 'Health Center', 'Campus Loop']

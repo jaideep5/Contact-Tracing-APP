@@ -21,7 +21,7 @@ db = client[dbConf["dbname"]]
 eventCollection = db[dbConf['events']]
 roomCollection = db[dbConf['rooms']]
 sanitizedEventCollection = db[dbConf['sanitizedEvents']]
-baseDate = dt(2020,1,22,0,0,0,000)
+baseDate = dt(2021,1,10,0,0,0,000)
 
 def fetch_room_info(room_id):
     # print(room_id)
