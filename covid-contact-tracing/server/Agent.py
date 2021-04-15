@@ -43,7 +43,7 @@ class Agent():
             self.room_visits.get(entry_event.room_id).add_user_visit(entry_event.user_id, entry_event.timestamp, exit_event.timestamp, infected_window)
 
 if __name__ == "__main__":
-    agent = Agent(35436)
+    agent = Agent(36869)
 
     # #push output to overlap.txt in mockdata
     # for ou in agent.overlapped_users:

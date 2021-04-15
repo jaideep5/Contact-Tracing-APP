@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(<String, String>{
-        'user_id': '123456',
+        'user_id': 'BMP85052',
         'room_id': room_id,
         'status': status,
         'timestamp': new DateTime.now().millisecondsSinceEpoch.toString()

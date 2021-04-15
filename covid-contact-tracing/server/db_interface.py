@@ -111,4 +111,4 @@ def getEventObject(event):
 
 
 if __name__ == "__main__":
-    print(get_infected_window("B21970", Window(dt(2020, 1, 24, 9, 0, 0, 0), dt(2020, 1, 24, 19, 0, 0, 0))))
+    print(get_infected_window("B21970", Window(dt(2021, 1, 24, 9, 0, 0, 0), dt(2021, 1, 24, 19, 0, 0, 0))))

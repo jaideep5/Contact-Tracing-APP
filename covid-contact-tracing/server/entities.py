@@ -59,7 +59,7 @@ class Window():
         return "(" + str(self.start.isoformat()) + " to " + str(self.end.isoformat()) + ")"
 
     def __eq__(self, other):
-        return self.start == other.start and self.end == other.end
+        return self.start == other.start and self.end == other.end\
 
 
 class UserVisitWindow(Window):

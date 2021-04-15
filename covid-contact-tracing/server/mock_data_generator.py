@@ -5,7 +5,7 @@ from db_interface import add_room
 from entities import Event, SanitizedEvent, Room, SanitizedStatus
 import db_interface as db
 import algorithms as algo
-base = datetime(2020, 1, 10, 00, 00, 00)
+base = datetime(2021, 1, 10, 00, 00, 00)
 
 room_names = ['Faner Hall', 'CS Main office', 'Linux Lab', 'Conference Room', 'Subway',
               'Grad School', 'Shryock Auditorium', 'REC center', 'Health Center', 'Campus Loop']
@@ -106,11 +106,11 @@ def main():
                 for i, rid in enumerate(ridList)]
     all_events, all_sanitized_events = [], []
     for un in unList:
-        base = datetime(2020, 1, 22, 00, 00, 00)
+        base = datetime(2021, 1, 10, 00, 00, 00)
         all_events += (get_entry_exit_pairs(un, ridList, 100))
 
     for dayCount in range((datetime.now() - base).days):
-        date = datetime(2020, 1, 22, 00, 00, 00) + timedelta(days=dayCount)
+        date = datetime(2021, 1, 10, 00, 00, 00) + timedelta(days=dayCount)
         all_sanitized_events += get_sanitized_events_for_the_day(
             bmpUserList, ridList,  date, frequency=2)
 
